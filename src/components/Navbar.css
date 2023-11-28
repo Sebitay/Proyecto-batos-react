@@ -1,7 +1,13 @@
 .navbar-container {
-    display: felex; 
+    padding: 7px;
+    display: flex; 
     flex-direction: column;
-    width: 50px;
-    height: 100vh;
+    height: 100vh - 14px;
     background-color: lightblue;
+}
+
+.navbar-icon {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
 }
