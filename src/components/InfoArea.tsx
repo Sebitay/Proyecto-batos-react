@@ -1,22 +1,34 @@
 import axios from 'axios';
 import { useState, useEffect} from 'react';
+import './InfoArea.css';
 
 const URL = "http://localhost:3000";
 
-function InfoArea() {
+interface InfoAreaProps {
+    area: string;
+}
+
+function InfoArea({area}: InfoAreaProps) {
     const [data, setData] = useState("");
 
 
     useEffect(() => {
-        axios.get(URL +'/message')
+        if(area !== "0"){
+        console.log('Fetching data for area: '+ area)
+        axios.get(URL +'/infoArea/' + area)
             .then((res) => {
-                console.log(res.data.message);})
+                setData(res.data.nCrimes);})
             .catch((err) => {
                 console.log(err);
-            })});
+            })}}, [area]);
+
 
     return (
-        <h1>{data}</h1>
+        <div className="info-area-container">
+            <h1>Area: {area}</h1>
+            <h1>Cimenes totales: {data}</h1>
+        </div>
+        
     );
 };
 

@@ -23,6 +23,9 @@ const Map = ({onClick}: MapProps) => {
         color: "black",
       },
     },
+    accessibility: {
+      enabled: false
+    },
     exporting: {
       enabled: false,
     },

@@ -18,5 +18,8 @@ def nCrimenesArea():
                 ORDER BY area_codigo ASC;
                 """)
     areas = cur.fetchall()
+    print(areas)
     cur.close()
-    return areas
+    return 
+
+print(nCrimenesArea())

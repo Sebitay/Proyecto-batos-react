@@ -12,21 +12,23 @@ interface MapClick {
   };
 }
 
-
 function App() {
-  const [area, setArea] = useState("0");
+  const [area, setArea] = useState("1");
   const [page, setPage] = useState("map")
 
   const setPeople = () => {
     setPage("people")
+    console.log("people")
   }
 
   const setMap = () => {
     setPage("map")
+    console.log("map")
   }
 
   const setChart = () => {
     setPage("chart")
+    console.log("chart")
   }
 
   const onClick = (e: MapClick) => {
@@ -37,8 +39,7 @@ function App() {
   <div className="container">
     <NavBar setChart={setChart} setMap={setMap} setPeople={setPeople}/>
     <Map onClick={onClick}/>
-    <InfoArea/>
-    <h1>Area: {area}, Page: {page}</h1>
+    <InfoArea area={area}/>
   </div>
   );
 }
