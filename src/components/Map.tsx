@@ -2,9 +2,16 @@ import { useState } from "react";
 import Highcharts from "highcharts/highmaps";
 import HighchartsReact from "highcharts-react-official";
 
+interface MapClick {
+  point: {
+    id: string;
+    name: string;
+    value: number;
+  };
+}
 
 interface MapProps {
-    onClick: (e: Highcharts.PointClickEventObject) => void;
+    onClick: (e: MapClick) => void;
 }
 
 const Map = ({onClick}: MapProps) => {

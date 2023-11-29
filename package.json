@@ -2,6 +2,7 @@
   "name": "proyecto-batos-react",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:3000",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "@highcharts/map-collection": "^2.1.0",
+    "axios": "^1.6.2",
     "hicharts": "^0.0.3",
     "highcharts": "^11.2.0",
     "highcharts-react-official": "^3.2.1",

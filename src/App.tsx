@@ -2,6 +2,16 @@ import Map from "./components/Map";
 import NavBar from "./components/Navbar";
 import "./App.css";
 import { useState } from "react";
+import InfoArea from "./components/InfoArea";
+
+interface MapClick {
+  point: {
+    id: string;
+    name: string;
+    value: number;
+  };
+}
+
 
 function App() {
   const [area, setArea] = useState("0");
@@ -19,7 +29,7 @@ function App() {
     setPage("chart")
   }
 
-  const onClick = (e) => {
+  const onClick = (e: MapClick) => {
     setArea(e.point.id)
   }
 
@@ -27,6 +37,7 @@ function App() {
   <div className="container">
     <NavBar setChart={setChart} setMap={setMap} setPeople={setPeople}/>
     <Map onClick={onClick}/>
+    <InfoArea/>
     <h1>Area: {area}, Page: {page}</h1>
   </div>
   );
