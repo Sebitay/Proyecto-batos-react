@@ -13,24 +13,30 @@ interface MapClick {
 }
 
 function App() {
-  const [area, setArea] = useState({id: '1', name: 'Devonshire'});
+  const [area, setArea] = useState({ id: "1", name: "Devonshire" });
   const [page, setPage] = useState("map");
 
   const onClick = (e: MapClick) => {
     setArea({
       id: e.point.id,
-      name: e.point.name
-      });
+      name: e.point.name,
+    });
   };
-  console.log(page)
-  if(page){
+  if (page === "map") {
     return (
       <div className="container">
         <NavBar onSet={setPage} />
         <Map onClick={onClick} />
-        <InfoArea areaId={area.id} areaName={area.name}/>
+        <InfoArea areaId={area.id} areaName={area.name} />
       </div>
-  );
+    );
+  }
+  if (page === "chart") {
+    return (
+      <div className="container">
+        <NavBar onSet={setPage} />
+      </div>
+    );
   }
 }
 

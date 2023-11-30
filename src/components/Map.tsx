@@ -13,12 +13,65 @@ interface MapClick {
   };
 }
 
+interface Map {
+  title: {
+    text: string;
+    style?: {
+      color: string;
+    };
+  };
+  exporting?: {
+    enabled: boolean;
+  };
+  chart?: {
+    backgroundColor: string;
+    height: string;
+  };
+  colorAxis?: {
+    stops: [number, string][];
+  };
+  legend?: {
+    align: string;
+    floating: boolean;
+    title: {
+      text: string;
+    };
+  };
+  series?: [
+    {
+      type: "map";
+      joinBy: "id";
+      data: {
+        id: string;
+        name: string;
+        value: number;
+        borderColor: string;
+        path: string;
+      }[];
+      name: "Numero de crimenes";
+      dataLabels: {
+        enabled: true;
+        format: "{point.name}";
+      };
+      point: {
+        events: {
+          click: (e: MapClick) => void;
+        };
+      };
+    }
+  ];
+}
+
 interface MapProps {
   onClick: (e: MapClick) => void;
 }
 
 function Map({ onClick }: MapProps) {
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState<Map>({
+    title: {
+      text: "Cargando mapa...",
+    },
+  });
 
   useEffect(() => {
     axios
@@ -30,9 +83,6 @@ function Map({ onClick }: MapProps) {
             style: {
               color: "black",
             },
-          },
-          accessibility: {
-            enabled: false,
           },
           exporting: {
             enabled: false,
@@ -54,7 +104,7 @@ function Map({ onClick }: MapProps) {
             align: "left",
             floating: true,
             title: {
-              text: "Random data",
+              text: "Numero de crimenes",
             },
           },
 
@@ -211,7 +261,7 @@ function Map({ onClick }: MapProps) {
                   path: "M413,630L376,639L391,661L327,705L360,748L397,817L413,856L425,855L401,789L468,783L480,788L481,802L493,802L494,843L511,843L510,788L494,788L494,774L509,766L508,735L534,734L534,729L499,729L499,741L480,741L462,732L447,710L458,698L425,674L468,636L437,631L413,630zM383,715L404,741L380,760L367,742L365,729L383,715z",
                 },
               ],
-              name: "Random data",
+              name: "Numero de crimenes",
               dataLabels: {
                 enabled: true,
                 format: "{point.name}",
@@ -229,7 +279,7 @@ function Map({ onClick }: MapProps) {
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "48vw"}}>
+    <div style={{ height: "100vh", width: "48vw" }}>
       <HighchartsReact
         className="map"
         highcharts={Highcharts}

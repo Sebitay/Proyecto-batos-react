@@ -17,7 +17,7 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
     if (areaId !== "0") {
       console.log("Fetching data for area: " + areaId);
       axios
-        .get(URL + "/infoArea/" + areaId)
+        .get(URL + "/infoAreaId/" + areaId)
         .then((res) => {
           setData(res.data.nCrimes);
         })

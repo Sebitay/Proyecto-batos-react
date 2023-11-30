@@ -14,6 +14,15 @@ def message(id):
         }
     return response
 
+@app.route('/infoAreaId/<id>', methods = ['GET'])
+def infoAreaId(id):
+    if request.method == 'GET':
+        data = db.nCrimenesAreaId(id)
+        response = {
+            'nCrimes': data
+        }
+    return response
+
 @app.route('/infoMap', methods=['GET'])
 def infoMap():
     if request.method == 'GET':
