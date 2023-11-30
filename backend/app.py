@@ -9,7 +9,6 @@ CORS(app)
 def message(id):
     if request.method == 'GET':
         data = db.nCrimenesArea()
-        print(data[int(id)-1])
         response = {
             'nCrimes': data[int(id)-1][1]
         }
@@ -22,6 +21,18 @@ def infoMap():
         response = []
         for item in data:
             response.append(item[1])
+    return jsonify(response)
+
+@app.route('/areaChart/<id>', methods=['GET'])
+def infoArea(id):
+    if request.method == 'GET':
+        data = db.crimenesCuatrimestre(id)
+        response = []
+        for item in data:
+            response.append({
+                'cuatrimestre': item[0].strftime("%Y-%m-%d"),
+                'nCrimes': item[1]
+            })
     return jsonify(response)
 
 

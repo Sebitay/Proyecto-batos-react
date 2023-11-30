@@ -3,6 +3,9 @@
     display: flex; 
     flex-direction: column;
     background-color: lightblue;
+    top: 0px;
+    left: 0px;
+    position: sticky;
 }
 
 .navbar-icon {

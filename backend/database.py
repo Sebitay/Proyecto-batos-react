@@ -17,6 +17,19 @@ def nCrimenesArea():
                 GROUP BY A.area_codigo
                 ORDER BY area_codigo ASC;
                 """)
-    areas = cur.fetchall()
+    data = cur.fetchall()
     cur.close()
-    return areas
+    return data
+
+def crimenesCuatrimestre(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT cuatrimestre, cantidad_crimenes
+                FROM crimenes_por_area_y_periodo
+                WHERE codigo_area = %s
+                ORDER BY cuatrimestre ASC;
+                """, (areaId,))
+    data = cur.fetchall()
+    cur.close()
+    return data

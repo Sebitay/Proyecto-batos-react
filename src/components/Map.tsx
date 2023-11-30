@@ -229,7 +229,7 @@ function Map({ onClick }: MapProps) {
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "50vw" }}>
+    <div style={{ height: "100vh", width: "48vw"}}>
       <HighchartsReact
         className="map"
         highcharts={Highcharts}

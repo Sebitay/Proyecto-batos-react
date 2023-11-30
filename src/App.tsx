@@ -13,35 +13,25 @@ interface MapClick {
 }
 
 function App() {
-  const [area, setArea] = useState("1");
+  const [area, setArea] = useState({id: '1', name: 'Devonshire'});
   const [page, setPage] = useState("map");
 
-  const setPeople = () => {
-    setPage("people");
-    console.log("people");
-  };
-
-  const setMap = () => {
-    setPage("map");
-    console.log("map");
-  };
-
-  const setChart = () => {
-    setPage("chart");
-    console.log("chart");
-  };
-
   const onClick = (e: MapClick) => {
-    setArea(e.point.id);
+    setArea({
+      id: e.point.id,
+      name: e.point.name
+      });
   };
-
-  return (
-    <div className="container">
-      <NavBar setChart={setChart} setMap={setMap} setPeople={setPeople} />
-      <Map onClick={onClick} />
-      <InfoArea area={area} />
-    </div>
+  console.log(page)
+  if(page){
+    return (
+      <div className="container">
+        <NavBar onSet={setPage} />
+        <Map onClick={onClick} />
+        <InfoArea areaId={area.id} areaName={area.name}/>
+      </div>
   );
+  }
 }
 
 export default App;
