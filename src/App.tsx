@@ -31,7 +31,7 @@ function App() {
       </div>
     );
   }
-  if (page === "chart") {
+  if (page !== "map") {
     return (
       <div className="container">
         <NavBar onSet={setPage} />

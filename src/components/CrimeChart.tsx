@@ -10,16 +10,17 @@ interface CrimeChartProps {
 }
 
 interface ChartData {
-    cuatrimestre: string;
-    nCrimes: number;
+  cuatrimestre: string;
+  nCrimes: number;
 }
 
 function CrimeChart({ areaId }: CrimeChartProps) {
   const [data, setData] = useState<ChartData[]>([]);
 
   useEffect(() => {
-    if (areaId !== '0') {
-      axios.get(URL + "/areaChart/" + areaId)
+    if (areaId !== "0") {
+      axios
+        .get(URL + "/areaChart/" + areaId)
         .then((res) => {
           setData(res.data);
         })
@@ -31,34 +32,31 @@ function CrimeChart({ areaId }: CrimeChartProps) {
 
   const options = {
     chart: {
-        type: 'line',
-      },
+      type: "line",
+    },
+    title: {
+      text: "Numero de crimenes por cuatrimestre",
+    },
+    xAxis: {
+      categories: data.map((data) => data.cuatrimestre),
+    },
+    yAxis: {
       title: {
-        text: 'Numero de crimenes por cuatrimestre',
+        text: "Numero de crimenes",
       },
-      xAxis: {
-        categories: data.map((data) => data.cuatrimestre),
+      min: 0,
+      max: 5000,
+    },
+    series: [
+      {
+        name: "Crimes",
+        data: data.map((data) => data.nCrimes),
       },
-      yAxis: {
-        title: {
-          text: 'Numero de crimenes',
-        },
-        min: 0,
-        max: 4000,
-      },
-      series: [
-        {
-          name: 'Crimes',
-          data: data.map((data) => data.nCrimes),
-        },
-      ],
-    };
+    ],
+  };
   return (
     <div className="chart-container">
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
-        />
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
 }

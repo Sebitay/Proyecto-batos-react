@@ -8,4 +8,11 @@
     box-sizing: border-box;
     width: 50vw;
     height: 100vh;
+    text-align: center;
+}
+
+.selects {
+    display: flex;
+    flex-direction: column;
+    border-bottom:gray solid 2px
 }
