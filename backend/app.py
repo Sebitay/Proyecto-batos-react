@@ -6,6 +6,84 @@ import re
 app = Flask(__name__)
 CORS(app)
 
+
+DESCS = [
+    {
+        'id': 'A',
+        'name': 'Otras Asiaticas'
+    },
+    {
+        'id': 'B',
+        'name': 'Negra'
+    },
+    {
+        'id': 'C',
+        'name': 'China'
+    },
+    {
+        'id': 'D',
+        'name': 'Camboyana'
+    },
+    {
+        'id': 'F',
+        'name': 'Filipina'
+    },
+    {
+        'id': 'G',
+        'name': 'Guameño'
+    },
+    {
+        'id': 'H',
+        'name': 'Hispanica'
+    },
+    {
+        'id': 'I',
+        'name': 'India Americana'
+    },
+    {
+        'id': 'J',
+        'name': 'Japonesa'
+    },
+    {
+        'id': 'K',
+        'name': 'Koreana'
+    },
+    {
+        'id': 'L',
+        'name': 'Laosiana'
+    },
+    {
+        'id': 'P',
+        'name': 'Isleña del pacifico'
+    },
+    {
+        'id': 'S',
+        'name': 'Samoana'
+    },
+    {
+        'id': 'U',
+        'name': 'Hawaiiana'
+    },
+    {
+        'id': 'V',
+        'name': 'Vietnamita'
+    },
+    {
+        'id': 'W',
+        'name': 'Blanca'
+    },
+    {
+        'id': 'X',
+        'name': 'Desconocida'
+    },
+    {
+        'id': 'Z',
+        'name': 'India Asiatica'
+    }]
+    
+
+
+
 @app.route('/infoArea/<id>', methods=['GET'])
 def message(id):
     if request.method == 'GET':
@@ -191,7 +269,6 @@ def getDataFiltrada(areaId,victAge,victSex,victDesc,crimeWeap):
             first = True
         else:
             newAge = re.split(r'[-+]+', victAge)
-            print(newAge)
             if newAge[1] == '':
                 if(int(newAge[0]) < 1000 and int(newAge[0]) >= 0):
                     ageFilter = ' WHERE edad >' + newAge[0]
@@ -219,17 +296,9 @@ def getDataFiltrada(areaId,victAge,victSex,victDesc,crimeWeap):
             else:
                 descFilter = " AND descendencia = '"+victDesc+"'"
 
-        print(crimeWeap)
-        print(db.armasIds())
         if(int(crimeWeap) in db.armasIds()):
             weapFilter = " WHERE arma_codigo = '"+crimeWeap+"'"
-        
-        print(areaFilter)
-        print(ageFilter)
-        print(sexFilter)
-        print(descFilter)
-        print(weapFilter)
-
+    
         if(len(ageFilter)>0 or len(sexFilter)>0 or len(descFilter)>0):
             victFilter = (" JOIN (SELECT * FROM victima AS V JOIN crimen_victima AS D ON V.id = D.victima_id%s%s%s) AS C ON A.crimen_id = C.crimen_id" % (ageFilter, sexFilter, descFilter))
                     
@@ -239,7 +308,37 @@ def getDataFiltrada(areaId,victAge,victSex,victDesc,crimeWeap):
         }
         return response
         
-        
+
+@app.route('/getTableData/<areaId>', methods=['GET'])
+def getTableData(areaId):
+    if(0<int(areaId)<22):
+        arma = db.topArma(areaId)
+        edad = db.topEdad(areaId)
+        sexo = db.topSexo(areaId)
+        desc = db.topDesc(areaId)
+    
+    if(sexo == 'M'):
+        sexo = 'Hombre'
+    elif(sexo == 'F'):
+        sexo = 'Mujer'
+    else:
+        sexo = 'Otro'
+
+    for item in DESCS:
+        if(desc == item['id']):
+            newDesc = item['name']
+            break
+        newDesc = 'Otras'
+    desc = newDesc
+    
+    response = {
+        'arma': arma,
+        'edad': edad,
+        'sexo': sexo,
+        'desc': desc
+    }
+    return jsonify(response)
+
 
 if __name__ == "__main__":
     app.run(host="localhost", port="3000", debug=True)

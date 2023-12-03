@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEventHandler } from "react";
+import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
@@ -7,9 +8,10 @@ const URL = "http://localhost:3000";
 interface SelectProps {
   selected: string;
   onChange: ChangeEventHandler;
+  onClose: () => void;
 }
 
-function EdadSelect({ selected, onChange }: SelectProps) {
+function EdadSelect({ selected, onChange, onClose }: SelectProps) {
   const [data, setData] = useState<string[]>(["Seleccione una edad..."]);
 
   useEffect(() => {
@@ -38,6 +40,12 @@ function EdadSelect({ selected, onChange }: SelectProps) {
           </option>
         ))}
       </select>
+      <IoMdClose
+        className="closeBtn"
+        onClick={onClose}
+        size="30"
+        color="#555555"
+      />
     </div>
   );
 }

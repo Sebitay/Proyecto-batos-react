@@ -14,5 +14,27 @@
 .selects {
     display: flex;
     flex-direction: column;
-    border-bottom:gray solid 2px
+    border:gray solid 2px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.areaStats {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    border:gray solid 2px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.button {
+    margin: 10px;
+    width: 40%;
+    height: 25px;
 }

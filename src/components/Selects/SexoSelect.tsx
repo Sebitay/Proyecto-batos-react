@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEventHandler } from "react";
+import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
@@ -12,13 +13,14 @@ interface Sexo {
 interface SelectProps {
   selected: string;
   onChange: ChangeEventHandler;
+  onClose: () => void;
 }
 
-function SexoSelect({ selected, onChange }: SelectProps) {
+function SexoSelect({ selected, onChange, onClose }: SelectProps) {
   const [data] = useState<Sexo[]>([
     { sexo: "0", name: "Seleccione un sexo..." },
-    { sexo: "F", name: "Femenino" },
-    { sexo: "M", name: "Masculino" },
+    { sexo: "F", name: "Mujer" },
+    { sexo: "M", name: "Hombre" },
     { sexo: "X", name: "Otro" },
   ]);
 
@@ -37,6 +39,12 @@ function SexoSelect({ selected, onChange }: SelectProps) {
           </option>
         ))}
       </select>
+      <IoMdClose
+        className="closeBtn"
+        onClick={onClose}
+        size="30"
+        color="#555555"
+      />
     </div>
   );
 }

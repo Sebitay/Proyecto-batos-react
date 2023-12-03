@@ -3,3 +3,57 @@
     flex-direction: row;
     margin: 4px
 }
+
+
+label {
+    width: 30%;
+    align-self:center;
+    text-align: end;
+    padding: 5px;
+}
+
+.closeBtn {
+    align-self: center;
+    cursor: pointer; 
+    size: 100%
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 16px;
+    width: 50%;
+    box-sizing: border-box;
+    background-color: white; /* Set background color */
+    cursor: pointer;
+  }
+  
+  /* Add styles when the select is focused or hovered */
+  select:focus, select:hover {
+    border-color: #007bff; /* Change border color on focus/hover */
+  }
+  
+  /* Style the dropdown arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  
+  select::after {
+    content: '▼'; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  /* Style for disabled state */
+  select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

@@ -61,26 +61,6 @@ def crimenesCuatrimestre(areaId):
     cur.close()
     return data
 
-def areasConMayorCrimen():
-    conn = getCon()
-    cur = conn.cursor()
-    cur.execute("""
-                SELECT a.nombre
-                FROM area AS a
-                JOIN crimen_area AS ca ON a.codigo = ca.area_codigo
-                GROUP BY a.nombre
-                HAVING COUNT(ca.crimen_id) > (
-                    SELECT AVG(CantidadCrímenes) FROM (
-                        SELECT area_codigo, COUNT(*) AS CantidadCrímenes
-                        FROM crimen_area
-                        GROUP BY area_codigo
-                    ) AS Promedio
-                );
-                """)
-    data = cur.fetchall()
-    cur.close()
-    return data
-
 def armas():
     conn = getCon()
     cur = conn.cursor()
@@ -151,10 +131,93 @@ def descendencias():
 
 def getCrimenesFiltrados(areaId, victAge, victSex, victDesc, crimeWeap, vict):
     query = ("SELECT COUNT(*) FROM crimen_area AS A JOIN (SELECT * FROM crimen_arma%s) AS B ON A.crimen_id = B.crimen_id%s%s;" % (crimeWeap, vict, areaId))
-    print(query)
     conn = getCon()
     cur = conn.cursor()
     cur.execute(query)
     data = cur.fetchone()
     cur.close()
     return data
+
+def topArma(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT descripcion, COUNT(*)
+                FROM crimen_area A
+                JOIN (
+                    SELECT crimen_id, descripcion
+                    FROM crimen_arma
+                    JOIN arma ON arma_codigo = codigo) AS B
+                ON A.crimen_id = B.crimen_id
+                WHERE A.area_codigo = %s
+                AND descripcion <> 'No information'
+                GROUP BY descripcion
+                ORDER BY count DESC LIMIT 1;
+                """, (areaId,))
+    data = cur.fetchone()
+    cur.close()
+    return data[0]
+
+def topSexo(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT sexo, COUNT(*)
+                FROM crimen_area A
+                JOIN (
+                    SELECT crimen_id, sexo
+                    FROM crimen_victima
+                    JOIN victima ON victima_id = id) AS B
+                ON A.crimen_id = B.crimen_id
+                WHERE A.area_codigo = %s
+                GROUP BY sexo
+                ORDER BY count DESC LIMIT 1;
+                """, (areaId,))
+    data = cur.fetchone()
+    cur.close()
+    return data[0]
+
+def topEdad(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT
+                    CASE
+                        WHEN v.edad BETWEEN 0 AND 17 THEN '0-17'
+                        WHEN v.edad BETWEEN 18 AND 24 THEN '18-24'
+                        WHEN v.edad BETWEEN 25 AND 34 THEN '25-34'
+                        WHEN v.edad BETWEEN 35 AND 44 THEN '35-44'
+                        WHEN v.edad BETWEEN 45 AND 54 THEN '45-54'
+                        WHEN v.edad BETWEEN 55 AND 64 THEN '55-64'
+                        WHEN v.edad >= 65 THEN '65+'
+                        ELSE 'Desconocido'
+                    END AS grupo_etario, COUNT(*)
+                FROM crimen_area ca
+                JOIN crimen_victima cv ON ca.crimen_id = cv.crimen_id
+                JOIN victima v ON cv.victima_id = v.id
+                WHERE ca.area_codigo = %s
+                GROUP BY grupo_etario
+                ORDER BY count DESC LIMIT 1;
+                """, (areaId,))
+    data = cur.fetchone()
+    cur.close()
+    return data[0]
+
+def topDesc(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT descendencia, COUNT(*)
+                FROM crimen_area A
+                JOIN (
+                    SELECT crimen_id, descendencia 
+                    FROM crimen_victima
+                    JOIN victima ON victima_id = id) AS B
+                ON A.crimen_id = B.crimen_id
+                WHERE A.area_codigo = %s
+                GROUP BY descendencia
+                ORDER BY count DESC LIMIT 1;
+                """, (areaId,))
+    data = cur.fetchone()
+    cur.close()
+    return data[0]

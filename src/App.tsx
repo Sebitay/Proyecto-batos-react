@@ -13,7 +13,7 @@ interface MapClick {
 }
 
 function App() {
-  const [area, setArea] = useState({ id: "1", name: "Devonshire" });
+  const [area, setArea] = useState({ id: "1", name: "Central" });
   const [page, setPage] = useState("map");
 
   const onClick = (e: MapClick) => {

@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEventHandler } from "react";
+import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
@@ -12,9 +13,10 @@ interface Descendencia {
 interface SelectProps {
   selected: string;
   onChange: ChangeEventHandler;
+  onClose: () => void;
 }
 
-function DescSelect({ selected, onChange }: SelectProps) {
+function DescSelect({ selected, onChange, onClose }: SelectProps) {
   const [data, setData] = useState<Descendencia[]>([
     { id: "N", name: "Seleccione un descendencia" },
   ]);
@@ -45,6 +47,12 @@ function DescSelect({ selected, onChange }: SelectProps) {
           </option>
         ))}
       </select>
+      <IoMdClose
+        className="closeBtn"
+        onClick={onClose}
+        size="30"
+        color="#555555"
+      />
     </div>
   );
 }

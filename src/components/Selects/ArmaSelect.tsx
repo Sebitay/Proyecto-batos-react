@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEventHandler } from "react";
+import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
@@ -12,9 +13,10 @@ interface Weapon {
 interface SelectProps {
   selected: string;
   onChange: ChangeEventHandler;
+  onClose: () => void;
 }
 
-function ArmaSelect({ selected, onChange }: SelectProps) {
+function ArmaSelect({ selected, onChange, onClose }: SelectProps) {
   const [data, setData] = useState<Weapon[]>([
     { id: "0", name: "Seleccione un arma..." },
   ]);
@@ -45,6 +47,12 @@ function ArmaSelect({ selected, onChange }: SelectProps) {
           </option>
         ))}
       </select>
+      <IoMdClose
+        className="closeBtn"
+        onClick={onClose}
+        size="30"
+        color="#555555"
+      />
     </div>
   );
 }
