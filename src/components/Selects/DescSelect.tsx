@@ -3,7 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface Descendencia {
   id: string;
@@ -34,7 +34,7 @@ function DescSelect({ selected, onChange, onClose }: SelectProps) {
 
   return (
     <div className="select-div">
-      <label htmlFor="ageSelect">Descendencia de la victima:</label>
+      <label htmlFor="ageSelect">Descendencia de la víctima:</label>
       <select
         name="ageSelect"
         id="ageSelect"

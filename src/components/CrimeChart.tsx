@@ -3,7 +3,7 @@ import axios from "axios";
 import Highcharts from "highcharts/highmaps";
 import HighchartsReact from "highcharts-react-official";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface CrimeChartProps {
   areaId: string;
@@ -35,21 +35,21 @@ function CrimeChart({ areaId }: CrimeChartProps) {
       type: "line",
     },
     title: {
-      text: "Numero de crimenes por cuatrimestre",
+      text: "Número de crímenes por cuatrimestre",
     },
     xAxis: {
       categories: data.map((data) => data.cuatrimestre),
     },
     yAxis: {
       title: {
-        text: "Numero de crimenes",
+        text: "Número de crímenes",
       },
       min: 0,
       max: 5000,
     },
     series: [
       {
-        name: "Crimes",
+        name: "Crimenes",
         data: data.map((data) => data.nCrimes),
       },
     ],

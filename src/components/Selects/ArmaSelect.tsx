@@ -3,7 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface Weapon {
   id: string;

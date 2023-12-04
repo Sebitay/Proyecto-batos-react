@@ -3,7 +3,7 @@ import Table from "./Table";
 import axios from "axios";
 import "./ChartPage.css";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface TableData {
   area: string;
@@ -39,13 +39,13 @@ function ChartPage() {
       <div className="tables">
         <div style={{ margin: 5 }}>
           <h2 style={{ textAlign: "center" }}>
-            Areas por sobre el promedio de crimenes
+            Áreas por sobre el promedio de crímenes
           </h2>
           <Table titulo="sobre" data={overData} />
         </div>
         <div style={{ margin: 5 }}>
           <h2 style={{ textAlign: "center" }}>
-            Areas por bajo el promedio de crimenes
+            Áreas por bajo el promedio de crímenes
           </h2>
           <Table titulo="bajo" data={underData} />
         </div>

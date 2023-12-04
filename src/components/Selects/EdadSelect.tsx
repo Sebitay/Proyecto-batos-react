@@ -3,7 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import "./Select.css";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface SelectProps {
   selected: string;
@@ -27,7 +27,7 @@ function EdadSelect({ selected, onChange, onClose }: SelectProps) {
 
   return (
     <div className="select-div">
-      <label htmlFor="ageSelect">Edad de la victima:</label>
+      <label htmlFor="ageSelect">Edad de la víctima:</label>
       <select
         name="ageSelect"
         id="ageSelect"

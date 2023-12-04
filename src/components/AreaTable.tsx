@@ -22,23 +22,23 @@ function AreaTable({ data }: AreaTableProps) {
           </th>
         </tr>
         <tr>
-          <td className="atd">Arma mas usada</td>
+          <td className="atd">Arma más usada</td>
           <td className="atd">{data.arma}</td>
         </tr>
         <tr>
-          <td className="atd">Edad mas afectada</td>
+          <td className="atd">Edad más afectada</td>
           <td className="atd">{data.edad}</td>
         </tr>
         <tr>
-          <td className="atd">Sexo mas afectado</td>
+          <td className="atd">Sexo más afectado</td>
           <td className="atd">{data.sexo}</td>
         </tr>
         <tr>
-          <td className="atd">Descendencia mas afectada</td>
+          <td className="atd">Descendencia más afectada</td>
           <td className="atd">{data.desc}</td>
         </tr>
         <tr>
-          <td className="atd">Premisa mas comun</td>
+          <td className="atd">Premisa mas común</td>
           <td className="atd">{data.prem}</td>
         </tr>
       </tbody>

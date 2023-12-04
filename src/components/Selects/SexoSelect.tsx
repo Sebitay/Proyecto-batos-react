@@ -24,7 +24,7 @@ function SexoSelect({ selected, onChange, onClose }: SelectProps) {
 
   return (
     <div className="select-div">
-      <label htmlFor="ageSelect">Sexo de la victima:</label>
+      <label htmlFor="ageSelect">Sexo de la víctima:</label>
       <select
         name="ageSelect"
         id="ageSelect"

@@ -1,10 +1,10 @@
 import psycopg2
 
 def getCon():
-    conn = psycopg2.connect(host ="cc3201.dcc.uchile.cl",
+    conn = psycopg2.connect(host ="0.0.0.0",
                             database ="cc3201",
                             user ="cc3201",
-                            password ="se3Ej9ea4kee", port ="5524")
+                            password ="se3Ej9ea4kee", port ="5432")
     return conn
 
 def areaIds():

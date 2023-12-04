@@ -8,7 +8,7 @@ import SexoSelect from "./Selects/SexoSelect";
 import DescSelect from "./Selects/DescSelect";
 import AreaTable from "./AreaTable";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface InfoAreaProps {
   areaId: string;
@@ -86,7 +86,7 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
     <div className="info-area-container">
       <h1>{areaName}</h1>
       <div className="selects">
-        <h2>Filtrar crimenes de {areaName}</h2>
+        <h2>Filtrar crímenes de {areaName}</h2>
         <ArmaSelect
           selected={arma}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -120,15 +120,15 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
             Limpiar Filtros
           </button>
         </div>
-        <h1>Crimenes totales: {data}</h1>
+        <h1>Crímenes totales: {data}</h1>
       </div>
       <div className="areaStats">
-        <h2>Estadisticas de {areaName}</h2>
+        <h2>Estadísticas de {areaName}</h2>
         <CrimeChart areaId={areaId} />
         <AreaTable data={tableData} />
         <p>
-          * Los crimenes sin arma no se consideran dentro del calculo del arma
-          mas usada
+          * Los crímenes sin arma no se consideran dentro del cálculo del arma
+          mas usada.
         </p>
       </div>
     </div>

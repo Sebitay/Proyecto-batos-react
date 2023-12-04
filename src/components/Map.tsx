@@ -3,7 +3,7 @@ import axios from "axios";
 import Highcharts from "highcharts/highmaps";
 import HighchartsReact from "highcharts-react-official";
 
-const URL = "http://localhost:3000";
+const URL = "https://grupo24.cc3201.dcc.uchile.cl/api";
 
 interface MapClick {
   point: {
@@ -104,7 +104,7 @@ function Map({ onClick }: MapProps) {
             align: "left",
             floating: true,
             title: {
-              text: "Numero de crimenes",
+              text: "Número de crímenes",
             },
           },
 

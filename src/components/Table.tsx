@@ -21,7 +21,7 @@ function Table({ titulo, data }: TableProps) {
   useEffect(() => {
     if (titulo === "sobre") {
       setColor("red");
-      setSign("-");
+      setSign("+");
     }
   }, []);
 
@@ -29,9 +29,9 @@ function Table({ titulo, data }: TableProps) {
     <table className="table">
       <thead>
         <tr>
-          <th className="th">Area</th>
+          <th className="th">Área</th>
           <th className="th">% por {titulo} el promedio</th>
-          <th className="th">Crimenes por {titulo} el promedio</th>
+          <th className="th">Címenes por {titulo} el promedio</th>
         </tr>
       </thead>
       <tbody>
