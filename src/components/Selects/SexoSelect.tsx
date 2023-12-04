@@ -1,9 +1,7 @@
-import { useState, useEffect, ChangeEventHandler } from "react";
+import { useState, ChangeEventHandler } from "react";
 import { IoMdClose } from "react-icons/io";
-import axios from "axios";
 import "./Select.css";
 
-const URL = "http://localhost:3000";
 
 interface Sexo {
   sexo: string;
