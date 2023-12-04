@@ -221,3 +221,74 @@ def topDesc(areaId):
     data = cur.fetchone()
     cur.close()
     return data[0]
+
+def topPrem(areaId):
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT descripcion, COUNT(*)
+                FROM crimen_area A
+                JOIN (
+                    SELECT crimen_id, descripcion 
+                    FROM crimen_premisa
+                    JOIN premisa ON premisa_codigo = codigo) AS B
+                ON A.crimen_id = B.crimen_id
+                WHERE A.area_codigo = %s
+                GROUP BY descripcion
+                ORDER BY count DESC LIMIT 1;
+                """, (areaId,))
+    data = cur.fetchone()
+    cur.close()
+    return data[0]
+
+def areasPorSobre():
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                WITH crimenes_por_area AS (
+                    SELECT area_codigo, COUNT(*) AS crimenes
+                    FROM crimen_area
+                    GROUP BY area_codigo),
+                    promedio_crimenes_por_area AS (
+                		SELECT AVG(crimenes) AS promedio
+                		FROM crimenes_por_area)
+                SELECT area.nombre, tt.porcentaje_diferencia, tt.diferencia
+                FROM area
+                JOIN (
+                    SELECT area_codigo, 
+                  	(crimenes - p.promedio) as diferencia, 
+                  	((crimenes -p.promedio) / p.promedio)*100 AS porcentaje_diferencia
+                	FROM crimenes_por_area, promedio_crimenes_por_area p
+                    WHERE crimenes > p.promedio
+                ) AS tt ON area.codigo = tt.area_codigo
+                ORDER BY porcentaje_diferencia DESC;
+                """)
+    data = cur.fetchall()
+    cur.close()
+    return data
+
+def areasPorBajo():
+    conn = getCon()
+    cur = conn.cursor()
+    cur.execute("""
+                WITH crimenes_por_area AS (
+                    SELECT area_codigo, COUNT(*) AS crimenes
+                    FROM crimen_area
+                    GROUP BY area_codigo),
+                    promedio_crimenes_por_area AS (
+                		SELECT AVG(crimenes) AS promedio
+                		FROM crimenes_por_area)
+                SELECT area.nombre, tt.porcentaje_diferencia, tt.diferencia
+                FROM area
+                JOIN (
+                    SELECT area_codigo, 
+                  	(p.promedio - crimenes) as diferencia, 
+                  	((p.promedio - crimenes) / p.promedio)*100 AS porcentaje_diferencia
+                	FROM crimenes_por_area, promedio_crimenes_por_area p
+                    WHERE crimenes < p.promedio
+                ) AS tt ON area.codigo = tt.area_codigo
+                ORDER BY porcentaje_diferencia DESC;
+                """)
+    data = cur.fetchall()
+    cur.close()
+    return data

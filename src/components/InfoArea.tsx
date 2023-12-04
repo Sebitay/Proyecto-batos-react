@@ -26,6 +26,7 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
     edad: "...",
     sexo: "...",
     desc: "...",
+    prem: "...",
   });
 
   const clearFilter = () => {
@@ -69,6 +70,7 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
       edad: "...",
       sexo: "...",
       desc: "...",
+      prem: "...",
     });
     axios
       .get(URL + "/getTableData/" + areaId)
@@ -124,6 +126,10 @@ function InfoArea({ areaId, areaName }: InfoAreaProps) {
         <h2>Estadisticas de {areaName}</h2>
         <CrimeChart areaId={areaId} />
         <AreaTable data={tableData} />
+        <p>
+          * Los crimenes sin arma no se consideran dentro del calculo del arma
+          mas usada
+        </p>
       </div>
     </div>
   );

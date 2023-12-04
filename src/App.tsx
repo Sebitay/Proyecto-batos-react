@@ -3,6 +3,7 @@ import NavBar from "./components/Navbar";
 import "./App.css";
 import { useState } from "react";
 import InfoArea from "./components/InfoArea";
+import ChartPage from "./components/ChartPage";
 
 interface MapClick {
   point: {
@@ -35,6 +36,7 @@ function App() {
     return (
       <div className="container">
         <NavBar onSet={setPage} />
+        <ChartPage />
       </div>
     );
   }

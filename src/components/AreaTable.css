@@ -1,23 +1,22 @@
-table {
+.atable {
     width: 100%;
     border-collapse: collapse;
     margin-top:20px;
-    margin-bottom: 20px;
-  }
+}
   
-  td {
+.atd {
     border: 1px solid #bbb;
     padding: 8px;
     text-align: left;
-  }
+}
 
-  th {
+.ath {
     border: 1px solid #bbb;
     padding: 8px;
     text-align: center;
-  }
-  
-  tr:nth-child(odd) {
+}
+
+tr:nth-child(odd) {
     background-color: #e5e5e5;
-  }
+}
   

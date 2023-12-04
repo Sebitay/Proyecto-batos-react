@@ -279,7 +279,7 @@ function Map({ onClick }: MapProps) {
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "48vw" }}>
+    <div style={{ height: "100vh", width: "48vw", overflow: "scroll" }}>
       <HighchartsReact
         className="map"
         highcharts={Highcharts}

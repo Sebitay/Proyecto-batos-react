@@ -316,6 +316,7 @@ def getTableData(areaId):
         edad = db.topEdad(areaId)
         sexo = db.topSexo(areaId)
         desc = db.topDesc(areaId)
+        prem = db.topPrem(areaId)
     
     if(sexo == 'M'):
         sexo = 'Hombre'
@@ -330,12 +331,44 @@ def getTableData(areaId):
             break
         newDesc = 'Otras'
     desc = newDesc
-    
+
     response = {
         'arma': arma,
         'edad': edad,
         'sexo': sexo,
-        'desc': desc
+        'desc': desc,
+        'prem': prem
+    }
+    return jsonify(response)
+
+@app.route('/chartPage', methods=['GET'])
+def chartPage():
+    tempOver = db.areasPorSobre()
+    tempUnder = db.areasPorBajo()
+    over = []
+    under = []
+
+    for item in tempOver:
+        over.append({
+            'area': item[0],
+            'info': {
+                'perc': int(item[1]),
+                'diff': int(item[2])
+            }
+        })
+
+    for item in tempUnder:
+        under.append({
+            'area': item[0],
+            'info': {
+                'perc': int(item[1]),
+                'diff': int(item[2])
+            }
+        })
+
+    response = {
+        'over': over,
+        'under': under
     }
     return jsonify(response)
 
